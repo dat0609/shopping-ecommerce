@@ -26,7 +26,7 @@ public class UserService {
 	RoleRepository roleRepository;
 
 	@Autowired
-	PasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder;
 
 	public List<User> listAll() {
 		return (List<User>) userRepository.findAll();
@@ -65,8 +65,8 @@ public class UserService {
 	}
 
 	private void encodePassword(User user) {
-		String encode = passwordEncoder.encode(user.getPassword());
-		user.setPassword(encode);
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
 	}
 
 	public boolean isEmailUnique(Integer id, String email) {

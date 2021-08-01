@@ -35,7 +35,7 @@
 					<th>ID</th>
 					<th>Category Image</th>
 					<th>Category Name</th>
-					<th>Alias</th>
+					<th class="hideable-column">Alias</th>
 					<th>Enabled</th>
 					<th></th>
 				</tr>								
@@ -47,7 +47,7 @@
 						<img th:src="@{${cat.imagePath}}" style="width: 100px" class="img-fluid"/>
 					</td>
 					<td>[[${cat.name}]]</td>
-					<td>[[${cat.alias}]]</td>
+					<td class="hideable-column">[[${cat.alias}]]</td>
 					<td>
 						<div th:replace="fragments :: category_status" />
 					</td>
@@ -58,6 +58,11 @@
 			</tbody>
 		</table>
 	</div>
+	
+	<div th:if="${listCategories.isEmpty()}" class="text-center">
+		<span>Not found any category</span>
+	</div>
+	
 	<div class="text-center">
 			Total Category : [[${totalItem}]] - Page [[${pageNum}]] of
 			[[${totalPage}]] &nbsp;  

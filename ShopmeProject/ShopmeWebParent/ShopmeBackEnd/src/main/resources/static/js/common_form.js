@@ -11,7 +11,7 @@ $(document).ready(function() {
 			this.reportValidity();
 		} else {
 			this.setCustomValidity("");
-			showImageThumbnail(this);				
+			showImageThumbnail(this);
 		}
 
 	});
@@ -25,4 +25,20 @@ function showImageThumbnail(fileInput) {
 	};
 
 	reader.readAsDataURL(file);
-} 
+}
+
+
+function showModalDialog(title, msg) {
+	$("#modalTitle").text(title)
+	$("#modalBody").text(msg)
+	$("#modalDialog").modal()
+
+}
+
+function showErrorModal(message) {
+	showModalDialog("Error", message)
+}
+
+function showWarningModal(message) {
+	showModalDialog("Warning", message)
+}

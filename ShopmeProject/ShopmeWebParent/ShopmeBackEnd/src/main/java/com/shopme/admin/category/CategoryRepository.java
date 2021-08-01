@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -16,7 +15,7 @@ public interface CategoryRepository extends PagingAndSortingRepository<Category,
 	@Query("SELECT c FROM Category c WHERE c.parent.id is NULL")
 	public List<Category> findRootCategories();
 
-	@Query("SELECT c FROM Category c WHERE c.parent.id is NULL")
+	@Query("SELECT c FROM Category c")
 	public Page<Category> findRootCategories(Pageable pageable);
 	
 	@Query("SELECT c FROM Category c WHERE c.name LIKE %?1%")

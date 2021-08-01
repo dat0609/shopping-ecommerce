@@ -88,7 +88,7 @@ public class UserController {
 		}
 		
 		
-		redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
+		redirectAttributes.addFlashAttribute("message", "The user has been saved successfully." );
 
 		return "redirect:/users";
 	}
@@ -118,7 +118,7 @@ public class UserController {
 
 		try {
 			userService.delete(id);
-			redirectAttributes.addFlashAttribute("message", "The user have been deleted");
+			redirectAttributes.addFlashAttribute("message", "The user ID " + id + " has been deleted successfully" );
 
 		} catch (UserNotFoundException e) {
 			redirectAttributes.addFlashAttribute("message", e.getMessage());

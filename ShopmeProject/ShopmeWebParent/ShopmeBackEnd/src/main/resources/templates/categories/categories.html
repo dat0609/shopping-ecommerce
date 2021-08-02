@@ -49,10 +49,13 @@
 					<td>[[${cat.name}]]</td>
 					<td class="hideable-column">[[${cat.alias}]]</td>
 					<td>
-						<div th:replace="fragments :: category_status" />
+						<div th:replace="fragments :: status(${cat.enabled}, 'category', '/categories/' + ${cat.id})" />
 					</td>
 					<td>
-						<div th:replace="fragments :: category_actions" />
+						<div th:replace="fragments :: edit('category', '/categories/edit/' + ${cat.id})" />
+							&nbsp; 
+						<div th:replace="fragments :: delete('category', ${cat.id}, '/categories/delete/' + ${cat.id}, ${!cat.hasChildren})" />						
+					
 					</td>					
 				</tr>
 			</tbody>

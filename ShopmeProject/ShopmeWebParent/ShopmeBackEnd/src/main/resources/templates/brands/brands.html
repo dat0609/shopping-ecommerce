@@ -40,10 +40,9 @@
 					</td>
 
 					<td>
-							<a class="fas fa-user-edit" th:href="@{'/brands/edit/' + ${brand.id}}">Edit</a>
-						&nbsp; 
-							<a class="fas fa-user-slash link-delete" th:brandId="${brand.id}" th:entityId="${brand.id}" th:href="@{'brands/delete/' + ${brand.id}}">Delete</a>
-												
+							<div th:replace="fragments :: edit('brand', '/brands/edit/' + ${brand.id})" />
+							&nbsp; 
+							<div th:replace="fragments :: delete('brand', ${brand.id}, '/brands/delete/' + ${brand.id}, true)" />						
 					</td>					
 				</tr>
 			</tbody>

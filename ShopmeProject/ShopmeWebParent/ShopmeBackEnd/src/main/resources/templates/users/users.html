@@ -52,14 +52,12 @@
 						<td>[[${user.lastName}]]</td>
 						<td>[[${user.roles}]]</td>
 						<td>
-							<a th:if="${user.enabled == true}" class="fal fa-check-circle" th:href="@{'/users/' + ${user.id} + '/enable/false'}"></a>
-							<a th:if="${user.enabled == false}" class="fal fa-times-circle" th:href="@{'/users/' + ${user.id} + '/enable/true'}"></a>
-							
+							<div th:replace="fragments :: status(${user.enabled}, 'user', '/users/' + ${user.id})" />
 						</td>
 						<td>
-							<a class="fas fa-user-edit" th:href="@{'/users/edit/' + ${user.id}}">Edit</a>
-						&nbsp; 
-							<a class="fas fa-user-slash link-delete" th:userId="${user.id}" th:href="@{'/users/delete/' + ${user.id}}">Delete</a>
+							<div th:replace="fragments :: edit('user', '/users/edit/' + ${user.id})" />
+							&nbsp;&nbsp;
+							<div th:replace="fragments :: delete('user', ${user.id}, '/users/delete/' + ${user.id}, true)" />
 						</td>
 					</tr>
 					

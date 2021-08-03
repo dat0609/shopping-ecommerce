@@ -23,22 +23,22 @@ public class CategoryService {
 	private CategoryRepository repo;
 
 	public List<Category> listByPage(CategoryPageInfo info, int pageNum, String keyword) {
-		
+
 		Pageable pageable = PageRequest.of(pageNum - 1, ROOT_CATEGORIES_PER_PAGE);
-		
+
 		Page<Category> pageCategory = null;
-		
+
 		if (keyword != null && !keyword.isEmpty()) {
 			pageCategory = repo.search(keyword, pageable);
-		}else {
+		} else {
 			pageCategory = repo.findRootCategories(pageable);
 		}
-		
+
 		List<Category> rootCategories = pageCategory.getContent();
-		
+
 		info.setTotalElements(pageCategory.getTotalElements());
 		info.setTotalPage(pageCategory.getTotalPages());
-		
+
 		if (keyword != null && !keyword.isEmpty()) {
 			List<Category> searchResult = pageCategory.getContent();
 			for (Category category : searchResult) {
@@ -50,8 +50,7 @@ public class CategoryService {
 		} else {
 			return listHierarchicalCategories(rootCategories);
 		}
-		
-		
+
 	}
 
 	private List<Category> listHierarchicalCategories(List<Category> rootCategories) {
@@ -131,6 +130,13 @@ public class CategoryService {
 	}
 
 	public Category save(Category category) {
+		Category parent = category.getParent();
+		if (parent != null) {
+			String allParentIds = parent.getAllParentIDs() == null ? "-" : parent.getAllParentIDs();
+			allParentIds += String.valueOf(parent.getId()) + "-";
+			category.setAllParentIDs(allParentIds);
+		}
+
 		return repo.save(category);
 	}
 

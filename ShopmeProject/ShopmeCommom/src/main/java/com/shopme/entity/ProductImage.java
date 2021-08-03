@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Transient;
+
 @Entity
 @Table(name = "product_images")
 public class ProductImage {
@@ -25,6 +27,12 @@ public class ProductImage {
 	private Product product;
 
 	public ProductImage() {
+	}
+
+	public ProductImage(Integer id, String name, Product product) {
+		this.id = id;
+		this.name = name;
+		this.product = product;
 	}
 
 	public ProductImage(String name, Product product) {
@@ -56,5 +64,9 @@ public class ProductImage {
 		this.product = product;
 	}
 
+	@Transient
+	public String getImagePath() {
+		return "/product-images/" + product.getId() + "/extras/" + this.name;
+	}
 
 }

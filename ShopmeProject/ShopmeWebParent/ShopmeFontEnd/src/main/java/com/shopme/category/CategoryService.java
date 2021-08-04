@@ -29,4 +29,23 @@ public class CategoryService {
 
 		return listNoChildrenCategories;
 	}
+
+	public Category getCategory(String alias) {
+		return categoryReposiroty.findByAliasEnabled(alias);
+	}
+
+	public List<Category> getCategoryParent(Category child) {
+		List<Category> listParent = new ArrayList<>();
+		
+		Category parent = child.getParent();
+		
+		while(parent != null) {
+			listParent.add(0, parent);
+			parent = parent.getParent();
+		}
+		
+		listParent.add(child);
+		
+		return listParent;
+	}
 }

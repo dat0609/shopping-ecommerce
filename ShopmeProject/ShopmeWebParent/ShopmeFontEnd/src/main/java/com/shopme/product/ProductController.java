@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,5 +72,28 @@ public class ProductController {
 		} catch (ProductNotFoundException e) {
 			return "error/404";
 		}
+	}
+	
+	@GetMapping("/search")
+	public String searchFirstPage(@Param("keyword") String keyword, Model model) {
+		return searchByPage(keyword, 1, model);
+	}
+
+	@GetMapping("/search/page/{pageNum}")
+	public String searchByPage(@Param("keyword") String keyword,
+			@PathVariable("pageNum") int pageNum,
+			Model model) {
+		Page<Product> pageProducts = productService.search(keyword, pageNum);
+		List<Product> listResult = pageProducts.getContent();
+		
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("totalPage", pageProducts.getTotalPages());
+		model.addAttribute("totalItem", pageProducts.getTotalElements());
+		model.addAttribute("pageTitle", keyword + " - Search Result");
+
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("listResult", listResult);
+
+		return "products/search_result";
 	}
 }

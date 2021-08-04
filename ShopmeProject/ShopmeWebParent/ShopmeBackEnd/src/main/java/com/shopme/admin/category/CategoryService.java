@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shopme.entity.Category;
+import com.shopme.exception.CategoryNotFoundException;
 
 @Service
 @Transactional

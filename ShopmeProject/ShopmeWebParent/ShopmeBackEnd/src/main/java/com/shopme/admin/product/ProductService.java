@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shopme.entity.Product;
+import com.shopme.exception.ProductNotFoundException;
 
 @Service
 @Transactional

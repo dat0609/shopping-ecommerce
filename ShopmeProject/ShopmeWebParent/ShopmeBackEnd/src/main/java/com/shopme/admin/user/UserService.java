@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shopme.entity.Role;
 import com.shopme.entity.User;
+import com.shopme.exception.UserNotFoundException;
 
 @Service
 @Transactional

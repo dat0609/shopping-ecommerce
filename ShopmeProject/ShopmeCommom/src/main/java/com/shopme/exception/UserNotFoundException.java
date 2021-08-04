@@ -1,4 +1,4 @@
-package com.shopme.admin.user;
+package com.shopme.exception;
 
 public class UserNotFoundException extends Exception {
 

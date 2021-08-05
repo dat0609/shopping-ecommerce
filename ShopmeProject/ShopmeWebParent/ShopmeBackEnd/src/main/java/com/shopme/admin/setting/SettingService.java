@@ -12,26 +12,25 @@ import com.shopme.entity.SettingCategory;
 @Service
 public class SettingService {
 
-	@Autowired
-	SettingRepository settingRepository;
-	
+	@Autowired private SettingRepository repo;
+
 	public List<Setting> listAllSettings() {
-		return (List<Setting>) settingRepository.findAll();
+		return (List<Setting>) repo.findAll();
 	}
-	
-	public GeneralSettingBag getGeneralSetting() {
+
+	public GeneralSettingBag getGeneralSettings() {
 		List<Setting> settings = new ArrayList<>();
-		
-		List<Setting> generalSettings = settingRepository.findByCategory(SettingCategory.GENERAL);
-		List<Setting> currencySettings = settingRepository.findByCategory(SettingCategory.CURRENCY);
-		
+
+		List<Setting> generalSettings = repo.findByCategory(SettingCategory.GENERAL);
+		List<Setting> currencySettings = repo.findByCategory(SettingCategory.CURRENCY);
+
 		settings.addAll(generalSettings);
 		settings.addAll(currencySettings);
-		
+
 		return new GeneralSettingBag(settings);
 	}
-	
+
 	public void saveAll(Iterable<Setting> settings) {
-		settingRepository.saveAll(settings);
+		repo.saveAll(settings);
 	}
 }

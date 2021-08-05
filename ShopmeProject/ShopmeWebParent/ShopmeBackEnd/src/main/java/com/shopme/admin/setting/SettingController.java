@@ -23,17 +23,14 @@ import com.shopme.entity.Setting;
 @Controller
 public class SettingController {
 
-	@Autowired
-	SettingService settingService;
+	@Autowired private SettingService service;
 
-	@Autowired
-	CurrencyRepository currencyRepository;
+	@Autowired private CurrencyRepository currencyRepo;
 
 	@GetMapping("/settings")
 	public String listAll(Model model) {
-
-		List<Currency> listCurrencies = currencyRepository.findAllByOrderByNameAsc();
-		List<Setting> listSettings = settingService.listAllSettings();
+		List<Setting> listSettings = service.listAllSettings();
+		List<Currency> listCurrencies = currencyRepo.findAllByOrderByNameAsc();
 
 		model.addAttribute("listCurrencies", listCurrencies);
 
@@ -47,7 +44,7 @@ public class SettingController {
 	@PostMapping("/settings/save_general")
 	public String saveGeneralSettings(@RequestParam("fileImage") MultipartFile multipartFile,
 			HttpServletRequest request, RedirectAttributes ra) throws IOException {
-		GeneralSettingBag settingBag = settingService.getGeneralSetting();
+		GeneralSettingBag settingBag = service.getGeneralSettings();
 
 		saveSiteLogo(multipartFile, settingBag);
 		saveCurrencySymbol(request, settingBag);
@@ -73,7 +70,7 @@ public class SettingController {
 
 	private void saveCurrencySymbol(HttpServletRequest request, GeneralSettingBag settingBag) {
 		Integer currencyId = Integer.parseInt(request.getParameter("CURRENCY_ID"));
-		Optional<Currency> findByIdResult = currencyRepository.findById(currencyId);
+		Optional<Currency> findByIdResult = currencyRepo.findById(currencyId);
 
 		if (findByIdResult.isPresent()) {
 			Currency currency = findByIdResult.get();
@@ -89,6 +86,6 @@ public class SettingController {
 			}
 		}
 
-		settingService.saveAll(listSettings);
+		service.saveAll(listSettings);
 	}
 }

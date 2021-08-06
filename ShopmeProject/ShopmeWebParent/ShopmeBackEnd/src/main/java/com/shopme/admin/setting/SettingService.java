@@ -12,7 +12,8 @@ import com.shopme.entity.SettingCategory;
 @Service
 public class SettingService {
 
-	@Autowired private SettingRepository repo;
+	@Autowired
+	private SettingRepository repo;
 
 	public List<Setting> listAllSettings() {
 		return (List<Setting>) repo.findAll();
@@ -32,5 +33,13 @@ public class SettingService {
 
 	public void saveAll(Iterable<Setting> settings) {
 		repo.saveAll(settings);
+	}
+
+	public List<Setting> getMailServerSettings() {
+		return repo.findByCategory(SettingCategory.MAIL_SERVER);
+	}
+
+	public List<Setting> getMailTemplateSettings() {
+		return repo.findByCategory(SettingCategory.MAIL_TEMPLATES);
 	}
 }

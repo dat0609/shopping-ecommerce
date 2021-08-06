@@ -23,7 +23,7 @@ public class State {
 	@Column(nullable = false, length = 45)
 	private String name;
 
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name = "country_id")
 	private Country country;
 	

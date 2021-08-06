@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -27,6 +29,7 @@ public class Country {
 	@Column(nullable = false, length = 5)
 	private String code;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "country")
 	private Set<State> states;
 	
@@ -39,4 +42,8 @@ public class Country {
 		this.code = code;
 	}
 	
+	public Country(Integer id) {
+		this.id = id;
+	}
+
 }

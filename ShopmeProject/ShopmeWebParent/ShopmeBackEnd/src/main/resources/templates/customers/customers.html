@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Customers - Shopme Admin', 'none')" />
+<body>
+<div class="container-fluid">
+	<div th:replace="nav_bar :: menu"></div>
+	<div>
+		<h2>Manage Customers</h2>	
+
+		<a th:href="@{/customers/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
+	</div>
+
+<div th:if="${message != mull}" class="alert alert-success text-center">[[${message}]]</div>
+	<div class="full-details">
+		<table class="table table-bordered table-striped table-hover table-responsive-xl">
+			<thead class="thead-dark">
+				<tr>
+					<th class="hideable-column">ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email</th>
+					<th>City</th>
+					<th>State</th>
+					<th>Country</th>
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+					<th>Enabled</th>
+					</th:block>
+					<th></th>
+				</tr>								
+			</thead>
+			<tbody>
+				<tr th:each="customer : ${listCustomers}">
+					<td>[[${customer.id}]]</td>
+					<td>[[${customer.firstName}]]</td>
+					<td>[[${customer.lastName}]]</td>
+					<td class="hideable-column">[[${customer.email}]]</td>
+					<td class="hideable-column">[[${customer.city}]]</td>
+					<td class="hideable-column">[[${customer.state}]]</td>
+					<td>[[${customer.country.name}]]</td>
+					<td>
+						<div th:replace="fragments :: status(${customer.enabled}, 'customer', '/customers/' + ${customer.id})" />
+					</td>
+					<td>
+						<a class="fas fa-file-alt fa-2x icon-green link-detail"
+							th:href="@{'/customers/detail/' + ${customer.id}}"
+							title="View details of this customer"
+							></a>					
+						&nbsp; 
+						<div th:replace="fragments :: edit('customer', '/customers/edit/' + ${customer.id})" />
+						&nbsp; 
+						<div th:replace="fragments :: delete('customer', ${customer.id}, '/customers/delete/' + ${customer.id}, true)" />						
+					</td>					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+<div class="text-center">
+			Total Customer : [[${totalItem}]] - Page [[${pageNum}]] of
+			[[${totalPage}]] &nbsp;  
+			<span
+				th:each="i: ${#numbers.sequence(1, totalPage)}"> <a
+				th:if="${i != pageNum}" th:href="@{'/customers/page/' +${i}}">
+					[[${i}]] </a> <span th:unless="${i != pageNum}">[[${i}]] </span>
+				&nbsp;&nbsp;
+			</span>
+</div>
+
+	<div th:replace="modal_fragments :: confirm_modal" />
+
+	<div class="modal fade" id="detailModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			</div>
+		</div>
+	</div>	
+
+	<div th:replace="fragments :: footer"></div>
+
+</div>
+<script th:src="@{/js/common_list.js}"></script>
+<script type="text/javascript">
+	moduleURL = "[[@{/customers}]]";
+
+	$(document).ready(function() {
+		$(".link-delete").on("click", function(e) {
+			e.preventDefault();
+			showDeleteConfirmModal($(this), 'customer');
+		});
+
+		$(".link-detail").on("click", function(e) {
+			e.preventDefault();
+			linkDetailURL = $(this).attr("href");
+			$("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
+		});		
+	});
+</script>
+</body>
+</html> 

@@ -12,7 +12,13 @@ spring:
             client-secret: ScPTysqdUslpS2-ZEsOrnkeg
             scope:
             - email
-            - profile          
+            - profile
+           facebook:
+            client-id: 531990824494705
+            client-secret: 66835ceb1352abc8a9e13a66fbeadaa8
+            scope:
+            - email
+            - public_profile                        
   datasource:
     password: Password789
     url: jdbc:mysql://localhost:3306/shopmedb

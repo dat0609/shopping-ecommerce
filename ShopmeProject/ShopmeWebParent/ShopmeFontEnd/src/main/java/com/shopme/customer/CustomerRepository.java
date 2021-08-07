@@ -21,4 +21,5 @@ public interface CustomerRepository extends CrudRepository<Customer , Integer>{
 	@Modifying
 	public void updateAuthenticationType(int customerId, AuthenticationType type);
 
+	Customer findByResetPasswordToken(String resetPasswordToken);
 }

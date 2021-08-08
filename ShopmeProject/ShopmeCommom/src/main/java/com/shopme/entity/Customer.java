@@ -208,6 +208,10 @@ public class Customer {
 	public void setCountry(Country country) {
 		this.country = country;
 	}
+	
+	public Customer(Integer id) {
+		this.id = id;
+	}
 
 	@Override
 	public String toString() {

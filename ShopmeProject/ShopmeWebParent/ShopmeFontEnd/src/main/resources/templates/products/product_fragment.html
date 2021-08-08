@@ -9,13 +9,19 @@
 			<b>[[${product.shortName}]]</b>
 		</a>
 	</div>
-	<div th:if="${product.discountPercent <= 0}">
+	<div th:replace="products/product_fragment :: product_price"></div>
+	
+	<div th:fragment="product_price" th:remove="tag">
+		<div th:if="${product.discountPercent <= 0}">
 		<span>[[${CURRENCY_SYMBOL}]] [[${product.price}]]</span>
 	</div>
 	<div th:if="${product.discountPercent > 0}">
 		<span style="font-size: larger; color: darkred">[[${CURRENCY_SYMBOL}]] [[${#numbers.formatDecimal(product.getDiscountPrice, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]</span>
 		<del><span>[[${CURRENCY_SYMBOL}]] [[${product.price}]]</span></del>
-	</div>				
+	</div>
+	</div>
+	
+				
 </div>
 
 </body>

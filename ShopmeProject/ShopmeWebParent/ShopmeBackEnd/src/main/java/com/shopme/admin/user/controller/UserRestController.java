@@ -1,8 +1,8 @@
 package com.shopme.admin.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shopme.admin.user.UserService;
@@ -13,7 +13,7 @@ public class UserRestController {
 	UserService userService;
 
 	@PostMapping("/users/check_email")
-	public String checkDuplicateEmail(@Param("email") String email, @Param("id") Integer id) {
+	public String checkDuplicateEmail(@RequestParam("email") String email, @RequestParam("id") Integer id) {
 		return userService.isEmailUnique(id, email) ? "OK" : "Duplicated";
 	}
 }

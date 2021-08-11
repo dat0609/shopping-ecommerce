@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Shipping Rates - Shopme Admin', 'none')" />
+<body>
+<div class="container-fluid">
+	<div th:replace="nav_bar :: menu"></div>
+	<div>
+		<h2>Manage Shipping Rates</h2>	
+
+		<a th:href="@{/shipping_rates/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2"></a>
+	</div>
+
+<div th:if="${message != mull}" class="alert alert-success text-center">[[${message}]]</div>
+	<div class="full-details">
+		<table class="table table-bordered table-striped table-hover table-responsive-xl">
+			<thead class="thead-dark">
+				<tr>
+					<th class="hideable-column">ID</th>
+					<th>Country</th>
+					<th>State</th>
+					<th>Rate</th>
+					<th>Day ship</th>
+					<th>COD</th>
+					<th></th>
+				</tr>								
+			</thead>
+			<tbody>
+				<tr th:each="rate : ${listsShippingRates}">
+					<td>[[${rate.id}]]</td>
+					<td>[[${rate.country.name}]]</td>
+					<td>[[${rate.state}]]</td>
+					<td>[[${rate.rate}]]</td>
+					<td>[[${rate.days}]]</td>
+					<td><div th:replace="shipping_rates/shipping_rates_fragment :: cod_support" /></td>
+					<td>
+						<div th:replace="fragments :: edit('shipping rate', '/shipping_rates/edit/' + ${rate.id})" />
+						&nbsp; 
+						<div th:replace="fragments :: delete('shipping rate', ${rate.id}, '/shipping_rates/delete/' + ${rate.id}, true)" />						
+					</td>					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="less-details">
+		<div th:each="rate : ${shippingRates}" class="row m-1">
+			<div class="col-4">
+				<span><b>[[${rate.country.name}]]</b></span>
+				<br/>
+				<span>[[${rate.state}]]</span>
+			</div>
+			<div class="col-8">
+				<div>
+					<div th:replace="shipping_rates/shipping_rates_fragment :: cod_support" />
+					&nbsp; 
+					<div th:replace="fragments :: edit('shipping rate', '/shipping_rates/edit/' + ${rate.id})" />
+					&nbsp; 
+					<div th:replace="fragments :: delete('shipping rate', ${rate.id}, '/shipping_rates/delete/' + ${rate.id}, true)" />
+				</div>
+			</div>
+			<div>&nbsp;</div>
+		</div>	
+	</div>		
+<div class="text-center">
+			Total Rate : [[${totalItem}]] - Page [[${pageNum}]] of
+			[[${totalPage}]] &nbsp;  
+			<span
+				th:each="i: ${#numbers.sequence(1, totalPage)}"> <a
+				th:if="${i != pageNum}" th:href="@{'/shipping_rates/page/' +${i}}">
+					[[${i}]] </a> <span th:unless="${i != pageNum}">[[${i}]] </span>
+				&nbsp;&nbsp;
+			</span>
+</div>
+
+	<div th:replace="modal_fragments :: confirm_modal" />
+	<div th:replace="fragments :: footer"></div>
+
+</div>
+
+<script th:src="@{/js/common_list.js}"></script>
+<script type="text/javascript">
+	moduleURL = "[[@{/shipping_rates}]]";
+
+	$(document).ready(function() {
+		$(".link-delete").on("click", function(e) {
+			e.preventDefault();
+			showDeleteConfirmModal($(this), 'shipping rate');
+		});
+	});
+</script>
+</body>
+</html> 

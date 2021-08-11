@@ -9,7 +9,6 @@
 			<b>[[${product.shortName}]]</b>
 		</a>
 	</div>
-	<div th:replace="products/product_fragment :: product_price"></div>
 	
 	<div th:fragment="product_price" th:remove="tag">
 		<div th:if="${product.discountPercent <= 0}">

@@ -19,6 +19,7 @@ import javax.persistence.Table;
 
 import org.springframework.data.annotation.Transient;
 
+import com.shopme.entity.Address;
 import com.shopme.entity.Customer;
 
 @Entity
@@ -279,5 +280,17 @@ public class Order {
 		destination += country;
 
 		return destination;
+	}
+
+	public void copyShippingAddress(Address address) {
+		setFirstName(address.getFirstName());
+		setLastName(address.getLastName());
+		setPhoneNumber(address.getPhoneNumber());
+		setAddressLine1(address.getAddressLine1());
+		setAddressLine2(address.getAddressLine2());
+		setCity(address.getCity());
+		setCountry(address.getCountry().getName());
+		setPostalCode(address.getPostalCode());
+		setState(address.getState());
 	}
 }

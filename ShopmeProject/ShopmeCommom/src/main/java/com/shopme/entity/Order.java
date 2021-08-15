@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Transient;
+
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -84,7 +86,7 @@ public class Order {
 		setCity(customer.getCity());
 		setCountry(customer.getCountry().getName());
 		setPostalCode(customer.getPostalCode());
-		setState(customer.getState());		
+		setState(customer.getState());
 	}
 
 	public Integer getId() {
@@ -262,9 +264,18 @@ public class Order {
 	public void setOrderDetails(Set<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
-	
+
 	public Order() {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Transient
+	public String getDestination() {
+		String destination = city + ", ";
+		if (state != null && !state.isEmpty())
+			destination += state + ", ";
+		destination += country;
+
+		return destination;
+	}
 }

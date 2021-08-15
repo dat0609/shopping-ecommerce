@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shopme.admin.setting.SettingService;
-import com.shopme.entity.Order;
-import com.shopme.entity.Setting;
+import com.shopme.entity.order.Order;
+import com.shopme.entity.setting.Setting;
 
 @Controller
 public class OrderController {

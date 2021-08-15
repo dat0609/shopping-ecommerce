@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.shopme.entity.Order;
+import com.shopme.entity.order.Order;
 
 public interface OrderRepository extends PagingAndSortingRepository<Order, Integer>{
 

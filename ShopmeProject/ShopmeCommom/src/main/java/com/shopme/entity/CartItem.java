@@ -1,24 +1,20 @@
 package com.shopme.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Transient;
 
+import com.shopme.entity.product.Product;
+
 import lombok.Data;
 
 @Entity
 @Table(name = "cart_items")
 @Data
-public class CartItem {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+public class CartItem extends IdBasedEntity{
 
 	@ManyToOne
 	@JoinColumn(name = "customer_id")

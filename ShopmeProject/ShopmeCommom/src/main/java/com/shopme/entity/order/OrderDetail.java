@@ -1,4 +1,4 @@
-package com.shopme.entity;
+package com.shopme.entity.order;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.shopme.entity.product.Product;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

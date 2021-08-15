@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.shopme.entity.Product;
+import com.shopme.entity.product.Product;
 import com.shopme.exception.ProductNotFoundException;
 
 @Service

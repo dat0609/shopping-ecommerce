@@ -14,11 +14,11 @@ import org.springframework.test.annotation.Rollback;
 
 import com.shopme.admin.order.OrderRepository;
 import com.shopme.entity.Customer;
-import com.shopme.entity.Order;
-import com.shopme.entity.OrderDetail;
-import com.shopme.entity.OrderStatus;
-import com.shopme.entity.PaymentMethod;
-import com.shopme.entity.Product;
+import com.shopme.entity.order.Order;
+import com.shopme.entity.order.OrderDetail;
+import com.shopme.entity.order.OrderStatus;
+import com.shopme.entity.order.PaymentMethod;
+import com.shopme.entity.product.Product;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)

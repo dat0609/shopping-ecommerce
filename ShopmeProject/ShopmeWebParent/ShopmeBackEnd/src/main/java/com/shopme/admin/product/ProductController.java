@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.shopme.admin.FileUploadUtil;
 import com.shopme.admin.brand.BrandService;
 import com.shopme.entity.Brand;
-import com.shopme.entity.Product;
+import com.shopme.entity.product.Product;
 import com.shopme.exception.ProductNotFoundException;
 
 @Controller

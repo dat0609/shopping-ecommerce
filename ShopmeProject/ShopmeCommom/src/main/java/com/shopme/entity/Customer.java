@@ -6,9 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,11 +14,7 @@ import org.springframework.data.annotation.Transient;
 
 @Entity
 @Table(name = "customers")
-public class Customer {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+public class Customer extends IdBasedEntity{
 
 	@Column(nullable = false, unique = true, length = 45)
 	private String email;
@@ -89,14 +82,6 @@ public class Customer {
 
 	public void setAuthenticationType(AuthenticationType authenticationType) {
 		this.authenticationType = authenticationType;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getEmail() {

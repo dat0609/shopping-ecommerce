@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shopme.entity.CartItem;
 import com.shopme.entity.Customer;
-import com.shopme.entity.Product;
+import com.shopme.entity.product.Product;
 import com.shopme.product.ProductRepository;
 
 @Service

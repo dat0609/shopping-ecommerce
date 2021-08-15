@@ -11,8 +11,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shopme.admin.FileUploadUtil;
-import com.shopme.entity.Product;
-import com.shopme.entity.ProductImage;
+import com.shopme.entity.product.Product;
+import com.shopme.entity.product.ProductImage;
 
 public class ProductSaveHelper {
 

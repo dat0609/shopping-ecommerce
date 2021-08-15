@@ -9,7 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.shopme.entity.Order;
+import com.shopme.entity.order.Order;
 
 @Service
 public class OrderService {

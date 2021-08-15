@@ -1,4 +1,4 @@
-package com.shopme.entity;
+package com.shopme.entity.product;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +19,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Transient;
+
+import com.shopme.entity.Brand;
+import com.shopme.entity.Category;
 
 import lombok.Data;
 

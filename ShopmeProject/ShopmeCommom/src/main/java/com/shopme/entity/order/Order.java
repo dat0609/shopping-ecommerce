@@ -1,4 +1,4 @@
-package com.shopme.entity;
+package com.shopme.entity.order;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Transient;
+
+import com.shopme.entity.Customer;
 
 @Entity
 @Table(name = "orders")

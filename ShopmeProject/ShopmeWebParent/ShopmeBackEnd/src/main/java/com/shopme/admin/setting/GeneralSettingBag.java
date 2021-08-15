@@ -2,8 +2,8 @@ package com.shopme.admin.setting;
 
 import java.util.List;
 
-import com.shopme.entity.Setting;
-import com.shopme.entity.SettingBag;
+import com.shopme.entity.setting.Setting;
+import com.shopme.entity.setting.SettingBag;
 
 public class GeneralSettingBag extends SettingBag{
 

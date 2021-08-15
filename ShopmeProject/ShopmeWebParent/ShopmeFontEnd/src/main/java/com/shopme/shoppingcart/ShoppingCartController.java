@@ -10,10 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.shopme.Utility;
+import com.shopme.address.AddressService;
 import com.shopme.customer.CustomerNotFoundException;
 import com.shopme.customer.CustomerService;
+import com.shopme.entity.Address;
 import com.shopme.entity.CartItem;
 import com.shopme.entity.Customer;
+import com.shopme.entity.ShippingRate;
+import com.shopme.shipping.ShippingRateService;
 
 @Controller
 public class ShoppingCartController {
@@ -23,6 +27,12 @@ public class ShoppingCartController {
 	
 	@Autowired
 	CustomerService customerService;
+	
+	@Autowired
+	AddressService addressService;
+
+	@Autowired
+	ShippingRateService shippingRateService;
 	
 	@GetMapping("/cart")
 	public String viewCart(Model model, HttpServletRequest request) throws CustomerNotFoundException {
@@ -35,6 +45,19 @@ public class ShoppingCartController {
 			estimatedTotal += item.getSubtotal();
 		}
 		
+		Address defaultAddress = addressService.getDefaultAddress(customer);
+		ShippingRate shippingRate = null;
+		boolean usePrimaryAddressAsDefault = false;
+		
+		if (defaultAddress != null) {
+			shippingRate = shippingRateService.getShippingRateForAddress(defaultAddress);
+		}else {
+			usePrimaryAddressAsDefault = true;
+			shippingRate = shippingRateService.getShippingRateForCustomer(customer);
+		}
+		
+		model.addAttribute("usePrimaryAddressAsDefault", usePrimaryAddressAsDefault);
+		model.addAttribute("shippingSuported", shippingRate != null);
 		model.addAttribute("cartItems", listCartItems);
 		model.addAttribute("estimatedTotal", estimatedTotal);
 		

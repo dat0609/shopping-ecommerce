@@ -27,4 +27,7 @@ public interface AddressRepository extends CrudRepository<Address, Integer>{
 	@Query("UPDATE Address a Set a.defaultForShipping = false WHERE a.id != ?1 AND a.customer.id = ?2")
 	@Modifying
 	public void setNonDefaultAddress(Integer defaultAddressId,int customerId);
+	
+	@Query("Select a From Address a Where a.customer.id = ?1 And a.defaultForShipping = true")
+	public Address findDefaultByCustomer(int customerId);
 }

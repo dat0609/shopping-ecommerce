@@ -1,0 +1,36 @@
+package com.shopme.shipping;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Service;
+
+import com.shopme.entity.Address;
+import com.shopme.entity.Customer;
+import com.shopme.entity.ShippingRate;
+
+@Service
+public class ShippingRateService {
+
+	@Autowired
+	ShippingRateRepository repository;
+	
+	public ShippingRate getShippingRateForCustomer(Customer customer) {
+		String state = customer.getState();
+		
+		if (state == null || state.isEmpty()) {
+			state = customer.getCity();
+		}
+		
+		return repository.findByCountryAndState(customer.getCountry(), state);
+	}
+	
+	public ShippingRate getShippingRateForAddress(Address address) {
+		String state = address.getState();
+		
+		if (state == null || state.isEmpty()) {
+			state = address.getCity();
+		}
+		
+		return repository.findByCountryAndState(address.getCountry(), state);
+	}
+}

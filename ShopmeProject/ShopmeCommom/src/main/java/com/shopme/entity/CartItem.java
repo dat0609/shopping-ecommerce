@@ -26,6 +26,9 @@ public class CartItem extends IdBasedEntity{
 
 	private int quantity;
 	
+	@javax.persistence.Transient
+	private float shippingCost;
+	
 	@Transient
 	public float getSubtotal() {
 		return product.getDiscountPrice() * quantity;

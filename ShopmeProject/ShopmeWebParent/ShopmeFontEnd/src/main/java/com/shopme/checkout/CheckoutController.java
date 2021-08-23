@@ -23,6 +23,7 @@ import com.shopme.customer.CustomerNotFoundException;
 import com.shopme.customer.CustomerService;
 import com.shopme.entity.Address;
 import com.shopme.entity.CartItem;
+import com.shopme.entity.Currency;
 import com.shopme.entity.Customer;
 import com.shopme.entity.ShippingRate;
 import com.shopme.entity.order.Order;
@@ -30,6 +31,7 @@ import com.shopme.entity.order.PaymentMethod;
 import com.shopme.order.OrderService;
 import com.shopme.setting.CurrencySettingBag;
 import com.shopme.setting.EmailSettingBag;
+import com.shopme.setting.PaymentSettingBag;
 import com.shopme.setting.SettingService;
 import com.shopme.shipping.ShippingRateService;
 import com.shopme.shoppingcart.ShoppingCartService;
@@ -80,7 +82,14 @@ public class CheckoutController {
 
 		List<CartItem> listCartItems = cartService.listCartItems(customer);
 		CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(listCartItems, shippingRate);
-
+		
+		String currencyCode = settingService.getCurrencyCode();
+		PaymentSettingBag paymentSetting = settingService.getPaymentSetting();
+		String paypalClientId = paymentSetting.getClientID();
+		
+		model.addAttribute("paypalClientId", paypalClientId);
+		model.addAttribute("customer", customer);
+		model.addAttribute("currencyCode", currencyCode);
 		model.addAttribute("checkoutInfo", checkoutInfo);
 		model.addAttribute("listCartItems", listCartItems);
 
